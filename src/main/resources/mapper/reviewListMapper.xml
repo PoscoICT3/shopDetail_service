@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shopDetail.shop.repository.ReviewListMapper">
+    <select id="getReviewByShopId" resultType="ReviewDto" parameterType="ReviewDto">
+        SELECT
+        r.id, u.userId as userName, r.content, r.photo, r.rate, s.name
+        FROM
+        review r join shop s join user u
+        where
+        s.id = r.shopId AND  u.id = r.userId AND s.id=#{shopId}
+    </select>
+</mapper>
