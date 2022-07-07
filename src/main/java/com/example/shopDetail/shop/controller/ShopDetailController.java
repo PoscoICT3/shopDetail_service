@@ -23,24 +23,26 @@ public class ShopDetailController {
     @Autowired
     ReviewListServiceImpl reviewListService;
 
-    @PostMapping("detail/{id}")
+    @GetMapping("detail/{id}")
     public HashMap<String, Object> getShopPostById(@PathVariable String id){
-        HashMap<String, Object> map = new HashMap<String, Object>();
-
         ShopDto shopDto = new ShopDto();
         shopDto.setId(Integer.valueOf(id));
 
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setShopId(Integer.valueOf(id));
 
-        List<ShopDto> shopDetail = shopService.findShopById(shopDto);
-        List<ReviewDto> reviewList = reviewListService.findReviewByShopId(reviewDto);
+        HashMap<String, Object> mapDto = shopService.findShopById(Integer.valueOf(id));
 
-        map.put("shop", shopDetail);
-        map.put("review", reviewList);
-        System.out.println("this is map........"+map);
+////        List<ShopDto> shopDetail = shopService.findShopById(shopDto);
+//        shopService.findShopById(Integer.valueOf(id));
+//
+////        List<ReviewDto> reviewList = reviewListService.findReviewByShopId(reviewDto);
+//
+////        map.put("shop", shopDetail);
+////        map.put("review", reviewList);
+////        System.out.println("this is map........"+map);
 
-        return map;
+        return mapDto;
     }
 
     @GetMapping("review/{id}")
